@@ -2,10 +2,10 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-import connectDB from "./configs/databaseConfigs.js";
-import userRoutes from './routes/AuthRoute.js'
-import featherRoute from './routes/FeatherRoute.js'
-import productRoute from './routes/ProductsRoutes.js'
+import connectDB from "./src/configs/databaseConfigs.js"; 
+import userRoutes from './src/routes/AuthRoute.js' 
+import featherRoute from './src/routes/FeatherRoute.js'
+import productRoute from './src/routes/ProductsRoutes.js'
 // Application
 const app = express();
 dotenv.config();
