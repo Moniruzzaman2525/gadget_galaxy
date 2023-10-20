@@ -16,7 +16,7 @@ router.get("/get-feather-product", getFeatherProducts);
 // exporting
 // user register router
 
-router.post("/add-to-cart",checkAuthUser, createAddToCart);
+router.post("/add-to-cart/:id",checkAuthUser, createAddToCart);
 router.delete('/delete-to-cart/:id',checkAuthUser, deleteAddToCart)
 router.patch('/update-to-cart/:id',checkAuthUser, UpdateAddToCart)
 router.get("/get-to-cart",checkAuthUser, getAllAddToCart);

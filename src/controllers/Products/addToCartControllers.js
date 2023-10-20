@@ -10,7 +10,7 @@ const createAddToCart = async (req, res) => {
     const result = new addToCartModel({
       name: productsDetails.name,
       price: productsDetails.price,
-      img: productsDetails.img,
+      img: productsDetails.image,
       quantity: req.body.quantity,
       user,
       product,
