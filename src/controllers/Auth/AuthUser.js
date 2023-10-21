@@ -8,18 +8,12 @@ const hashPassword = async (password) => {
 };
 
 const register = async (req, res) => {
-  const { name, email, password, confirmPassword, role } =
+  const { lastName, email, password, firstNme, role } =
     req.body;
   try {
-    if (!email || !name || !password || !confirmPassword) {
+    if (!email || !firstNme || !password || !lastName) {
       return res.status(400).json({
         message: "Please fill all the required fields....",
-      });
-    }
-
-    if (password === !confirmPassword) {
-      return res.status(400).json({
-        message: "Passwords do not match",
       });
     }
     const users = await UserModel.findOne({ email });
@@ -31,7 +25,8 @@ const register = async (req, res) => {
 
     const hashedPassword = await hashPassword(password);
     const user = new UserModel({
-      name,
+      firstNme,
+      lastName,
       email,
       password: hashedPassword,
       role: role || "USER",
