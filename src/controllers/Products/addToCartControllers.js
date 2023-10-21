@@ -12,6 +12,7 @@ const createAddToCart = async (req, res) => {
       price: productsDetails.price,
       img: productsDetails.image,
       quantity: req.body.quantity,
+      paymentConfirm: false,
       user,
       product,
     });
@@ -67,7 +68,7 @@ const getAllAddToCart = async (req, res) => {
 
     const product = await addToCartModel.find({
       user,
-      paymentConfirm: { $ne: true },
+      paymentConfirm: false,
     });
 
     return res.status(200).send({
@@ -82,18 +83,38 @@ const getAllPay = async (req, res) => {
   try {
     const user = req.user_id;
 
-    const product = await addToCartModel.find({
+    const filter = {
       user,
-      paymentConfirm: true,
-    });
+      paymentConfirm: false, 
+    };
+
+    const update = {
+      $set: { paymentConfirm: true },
+    };
+
+    const result = await addToCartModel.updateMany(filter, update);
 
     return res.status(200).send({
-      data: product,
+      message: `Updated ${result.nModified} documents.`,
     });
   } catch (error) {
     return res.status(500).send(error.message);
   }
 };
+
+const confirmOrder = async (req, res) => {
+  try {
+    const  product = req.body
+    console.log(product);
+    // const visitorBook = await addToCartModel.findByIdAndUpdate(  );
+    // if (!visitorBook) {
+    //   return res.status(404).send({ error: "Visitor book not found" });
+    // }
+    // return res.send(visitorBook);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+}
 
 export {
   createAddToCart,
@@ -101,4 +122,5 @@ export {
   UpdateAddToCart,
   getAllAddToCart,
   getAllPay,
+  confirmOrder
 };
