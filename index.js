@@ -6,7 +6,7 @@ import connectDB from "./src/configs/databaseConfigs.js";
 import userRoutes from './src/routes/AuthRoute.js' 
 import featherRoute from './src/routes/FeatherRoute.js'
 import productRoute from './src/routes/ProductsRoutes.js'
-import feedbackRoute from './src/routes/FeatherRoute.js'
+import feedbackRoute from './src/routes/UserFeedaBackRoutes.js'
 // Application
 const app = express();
 dotenv.config();

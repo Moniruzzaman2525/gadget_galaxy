@@ -1,5 +1,6 @@
+import UserFeedBacktModel from "../../models/userFeedBack.js";
 
-import UserFeedBacktModel from "../../models/UserFeedBacktModels.js";
+
 
 const createUserFeedaBack = async (req, res) => {
   try {
