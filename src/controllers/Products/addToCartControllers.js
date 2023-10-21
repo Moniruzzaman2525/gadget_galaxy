@@ -78,6 +78,27 @@ const getAllAddToCart = async (req, res) => {
     return res.status(500).send(error.message);
   }
 };
+const getAllOrderProduct = async (req, res) => {
+  try {
+    const user = req.user_id;
+
+    if (req.params.id) {
+      const product = await addToCartModel.findById(req.params.id);
+      return res.status(200).send(product);
+    }
+
+    const product = await addToCartModel.find({
+      user,
+      paymentConfirm: true,
+    });
+
+    return res.status(200).send({
+      data: product,
+    });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
 
 const getAllPay = async (req, res) => {
   try {
@@ -122,5 +143,6 @@ export {
   UpdateAddToCart,
   getAllAddToCart,
   getAllPay,
-  confirmOrder
+  confirmOrder,
+  getAllOrderProduct
 };

@@ -1,7 +1,7 @@
 // imports
 import { Router } from "express";
 import { UpdateProduct, createProduct, deleteProduct, getAllProduct, getFeatherProducts } from "../controllers/Products/ProductsControllers.js";
-import { UpdateAddToCart, confirmOrder, createAddToCart, deleteAddToCart, getAllAddToCart, getAllPay } from "../controllers/Products/addToCartControllers.js";
+import { UpdateAddToCart, confirmOrder, createAddToCart, deleteAddToCart, getAllAddToCart, getAllOrderProduct, getAllPay } from "../controllers/Products/addToCartControllers.js";
 import { checkAuthUser } from "../middleware/authMiddleware.js";
 // router
 const router = Router();
@@ -23,6 +23,7 @@ router.get("/get-to-cart",checkAuthUser, getAllAddToCart);
 router.get("/get-to-cart/:id",checkAuthUser, getAllAddToCart);
 router.post("/confirm-order-products",checkAuthUser, getAllPay);
 router.post("/get-order-products",checkAuthUser, getAllPay);
+router.get("/get-all-order-products",checkAuthUser, getAllOrderProduct);
 // exporting
 
 // router.post('/confirm-order', confirmOrder)
