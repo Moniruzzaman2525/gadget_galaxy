@@ -1,7 +1,7 @@
 // imports
 import { Router } from "express";
-import { getAllUser, login, register, updateUserRole } from "../controllers/Auth/AuthUser.js";
-import { checkAdmin } from "../middleware/authMiddleware.js";
+import { getAllUser, getUserProfile, login, register, updateProfile, updateUserRole } from "../controllers/Auth/AuthUser.js";
+import { checkAdmin, checkAuthUser } from "../middleware/authMiddleware.js";
 // router
 const router = Router();
 
@@ -10,6 +10,7 @@ router.post("/register", register);
 router.post("/login", login);
 router.get('/get-user', checkAdmin, getAllUser)
 router.patch('/update-user-role/:id', checkAdmin, updateUserRole)
-
+router.get('/get-user-profile', checkAuthUser, getUserProfile)
+router.patch('/update-profile', checkAuthUser, updateProfile)
 // exporting
 export default router;

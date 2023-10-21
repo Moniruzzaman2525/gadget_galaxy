@@ -160,6 +160,47 @@ const updateUserRole = async (req, res) => {
   }
 };
 
+const getUserProfile = async (req, res) => {
+  try {
+    const user = req.user_id;
+    const result = await UserModel.findById({ _id: user });
+
+    if (!result) {
+      return res.status(404).send('User not found');
+    }
+    const fullName = `${result?.firstName} ${result?.lastName}`;
+    const modifiedUser = {
+      ...result._doc,
+      name: fullName,
+    };
+
+    return res.status(200).send({
+      user: modifiedUser,
+    });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
+const updateProfile = async (req, res) => {
+  try {
+    const userId = req.user_id; 
+    const updateData = req.body;
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      userId,
+      updateData,
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    return res.status(200).json(updatedUser);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
 
 
-export { login, register, getAllUser, updateUserRole };
+export { login, register, getAllUser, updateUserRole, getUserProfile, updateProfile };

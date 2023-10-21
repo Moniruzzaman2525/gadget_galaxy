@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: Date.now,
   },
-  firstNme: {
+  firstName: {
     type: String,
     required: true,
   },
@@ -32,6 +32,14 @@ const userSchema = new mongoose.Schema({
     required: false,
   },
   customarId: {
+    type: String,
+    required: false,
+  },
+  phone: {
+    type: String,
+    required: false,
+  },
+  address: {
     type: String,
     required: false,
   },
