@@ -6,6 +6,7 @@ import connectDB from "./src/configs/databaseConfigs.js";
 import userRoutes from './src/routes/AuthRoute.js' 
 import featherRoute from './src/routes/FeatherRoute.js'
 import productRoute from './src/routes/ProductsRoutes.js'
+import feedbackRoute from './src/routes/FeatherRoute.js'
 // Application
 const app = express();
 dotenv.config();
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use("/api/v1/auth/", userRoutes);
 app.use("/api/v1/feather/", featherRoute);
 app.use("/api/v1/product/", productRoute);
+app.use("/api/v1/feedback/", feedbackRoute);
 
 
 // Routes
