@@ -8,10 +8,10 @@ const hashPassword = async (password) => {
 };
 
 const register = async (req, res) => {
-  const { lastName, email, password, firstNme, role } =
+  const { lastName, email, password, firstName, role } =
     req.body;
   try {
-    if (!email || !firstNme || !password || !lastName) {
+    if (!email || !firstName || !password || !lastName) {
       return res.status(400).json({
         message: "Please fill all the required fields....",
       });
