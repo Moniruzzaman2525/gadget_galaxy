@@ -25,7 +25,7 @@ const register = async (req, res) => {
 
     const hashedPassword = await hashPassword(password);
     const user = new UserModel({
-      firstNme,
+      firstName,
       lastName,
       email,
       password: hashedPassword,
@@ -141,7 +141,6 @@ const updateUserRole = async (req, res) => {
   try {
     const { id } = req.params;
     const { role } = req.body;
-
     const updatedUser = await UserModel.updateOne(
       { _id: id },
       { $set: { role } }
@@ -201,6 +200,22 @@ const updateProfile = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 }
+const deleteUser = async (req, res) => {
+  try {
+    if (!(await UserModel.findById(req.params.id))) {
+      return res.status(400).send({
+        message: "Invalid Id!",
+      });
+    }
+    await UserModel.findByIdAndDelete(req.params.id);
 
+    return res.status(200).send({
+      message: "Success",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send(error);
+  }
+};
 
-export { login, register, getAllUser, updateUserRole, getUserProfile, updateProfile };
+export { login, register, getAllUser, updateUserRole, getUserProfile, updateProfile, deleteUser };
